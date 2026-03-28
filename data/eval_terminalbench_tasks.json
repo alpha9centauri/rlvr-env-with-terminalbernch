@@ -22,5 +22,11 @@
     "instruction": "What is 100 + 23? Return only the final answer.",
     "expected_answer": "123",
     "task_type": "arithmetic"
+  },
+  {
+    "task_id": "eval_005",
+    "instruction": "Count how many times letter 't' appears in word 'letter'. Return only the final answer.",
+    "expected_answer": "2",
+    "task_type": "counting"
   }
 ]

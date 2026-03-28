@@ -1,0 +1,218 @@
+{
+  "config": {
+    "benchmark": "terminalbench",
+    "algorithm": "grpo",
+    "model": {
+      "name": "Qwen/Qwen2.5-0.5B-Instruct"
+    },
+    "training": {
+      "max_steps": 100,
+      "batch_size": 2,
+      "learning_rate": 1e-05
+    },
+    "generation": {
+      "max_new_tokens": 16,
+      "do_sample": false
+    },
+    "environment": {
+      "max_episode_steps": 20
+    },
+    "reward": {
+      "success_reward": 1.0,
+      "failure_reward": 0.0,
+      "step_penalty": 0.01
+    }
+  },
+  "num_tasks": 6,
+  "average_reward": 0.9866666666666668,
+  "success_rate": 1.0,
+  "success_rate_by_task_type": {
+    "exact_match": 1.0,
+    "arithmetic": 1.0,
+    "counting": 1.0
+  },
+  "average_reward_by_task_type": {
+    "exact_match": 0.9833333333333334,
+    "arithmetic": 0.99,
+    "counting": 0.99
+  },
+  "average_steps_per_episode": 1.1666666666666667,
+  "average_steps_per_successful_episode": 1.1666666666666667,
+  "episodes": [
+    {
+      "task_id": "task_001",
+      "total_reward": 0.99,
+      "success": true,
+      "transitions": [
+        {
+          "observation": {
+            "task_id": "task_001",
+            "instruction": "Output exactly: hello_world",
+            "step_count": 0,
+            "task_type": "exact_match"
+          },
+          "action": "hello_world",
+          "reward": 0.99,
+          "done": true,
+          "info": {
+            "success": true,
+            "task_type": "exact_match",
+            "expected_answer": "hello_world",
+            "normalized_expected_answer": "hello_world",
+            "agent_action": "hello_world",
+            "normalized_action": "hello_world"
+          }
+        }
+      ]
+    },
+    {
+      "task_id": "task_002",
+      "total_reward": 0.97,
+      "success": true,
+      "transitions": [
+        {
+          "observation": {
+            "task_id": "task_002",
+            "instruction": "Output exactly: cat",
+            "step_count": 0,
+            "task_type": "exact_match"
+          },
+          "action": "The final answer is \"cat\".",
+          "reward": -0.01,
+          "done": false,
+          "info": {
+            "success": false,
+            "task_type": "exact_match",
+            "expected_answer": "cat",
+            "normalized_expected_answer": "cat",
+            "agent_action": "The final answer is \"cat\".",
+            "normalized_action": "cat"
+          }
+        },
+        {
+          "observation": {
+            "task_id": "task_002",
+            "instruction": "Output exactly: cat",
+            "step_count": 1,
+            "task_type": "exact_match"
+          },
+          "action": "cat",
+          "reward": 0.98,
+          "done": true,
+          "info": {
+            "success": true,
+            "task_type": "exact_match",
+            "expected_answer": "cat",
+            "normalized_expected_answer": "cat",
+            "agent_action": "cat",
+            "normalized_action": "cat"
+          }
+        }
+      ]
+    },
+    {
+      "task_id": "task_003",
+      "total_reward": 0.99,
+      "success": true,
+      "transitions": [
+        {
+          "observation": {
+            "task_id": "task_003",
+            "instruction": "Output exactly: 42",
+            "step_count": 0,
+            "task_type": "exact_match"
+          },
+          "action": "42",
+          "reward": 0.99,
+          "done": true,
+          "info": {
+            "success": true,
+            "task_type": "exact_match",
+            "expected_answer": "42",
+            "normalized_expected_answer": "42",
+            "agent_action": "42",
+            "normalized_action": "42"
+          }
+        }
+      ]
+    },
+    {
+      "task_id": "task_004",
+      "total_reward": 0.99,
+      "success": true,
+      "transitions": [
+        {
+          "observation": {
+            "task_id": "task_004",
+            "instruction": "What is 15 + 27? Return only the final answer.",
+            "step_count": 0,
+            "task_type": "arithmetic"
+          },
+          "action": "42",
+          "reward": 0.99,
+          "done": true,
+          "info": {
+            "success": true,
+            "task_type": "arithmetic",
+            "expected_answer": "42",
+            "normalized_expected_answer": "42",
+            "agent_action": "42",
+            "normalized_action": "42"
+          }
+        }
+      ]
+    },
+    {
+      "task_id": "task_005",
+      "total_reward": 0.99,
+      "success": true,
+      "transitions": [
+        {
+          "observation": {
+            "task_id": "task_005",
+            "instruction": "What is 9 + 8? Return only the final answer.",
+            "step_count": 0,
+            "task_type": "arithmetic"
+          },
+          "action": "17",
+          "reward": 0.99,
+          "done": true,
+          "info": {
+            "success": true,
+            "task_type": "arithmetic",
+            "expected_answer": "17",
+            "normalized_expected_answer": "17",
+            "agent_action": "17",
+            "normalized_action": "17"
+          }
+        }
+      ]
+    },
+    {
+      "task_id": "task_006",
+      "total_reward": 0.99,
+      "success": true,
+      "transitions": [
+        {
+          "observation": {
+            "task_id": "task_006",
+            "instruction": "Count how many times letter 'a' appears in word 'banana'. Return only the final answer.",
+            "step_count": 0,
+            "task_type": "counting"
+          },
+          "action": "3",
+          "reward": 0.99,
+          "done": true,
+          "info": {
+            "success": true,
+            "task_type": "counting",
+            "expected_answer": "3",
+            "normalized_expected_answer": "3",
+            "agent_action": "3",
+            "normalized_action": "3"
+          }
+        }
+      ]
+    }
+  ]
+}

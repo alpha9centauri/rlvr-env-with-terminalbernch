@@ -1,3 +1,4 @@
+import re
 from dataclasses import dataclass
 from typing import Dict, Tuple, Any
 
@@ -28,7 +29,7 @@ def normalize_text(text: str) -> str:
     return text.strip("\"'`.,:;!? ")
 
 
-def verify_action(action: str, expected_answer: str, task_type: str) -> bool:
+def verify_action(action: str, expected_answer: str, task_type: str, instruction: str) -> bool:
     raw_action = action.strip()
     raw_expected = expected_answer.strip()
 
@@ -41,7 +42,23 @@ def verify_action(action: str, expected_answer: str, task_type: str) -> bool:
     if task_type == "arithmetic":
         return norm_action == norm_expected
 
+    if task_type == "counting":
+        return compute_counting_answer(instruction) == raw_action
+
     raise ValueError(f"Unknown task_type: {task_type}")
+
+
+def compute_counting_answer(instruction: str) -> str:
+    letter_match = re.search(r"letter '(.{1})'", instruction)
+    word_match = re.search(r"word '([^']+)'", instruction)
+
+    if not letter_match or not word_match:
+        raise ValueError("Counting instruction must specify letter and word")
+
+    letter_char = letter_match.group(1).lower()
+    word_text = word_match.group(1).lower()
+    count = word_text.count(letter_char)
+    return str(count)
 
 
 class DummyTerminalBenchEnv:
@@ -80,6 +97,7 @@ class DummyTerminalBenchEnv:
             action=action,
             expected_answer=self.current_task.expected_answer,
             task_type=self.current_task.task_type,
+            instruction=self.current_task.instruction,
         )
 
         reached_limit = self.step_count >= self.max_episode_steps

@@ -28,5 +28,11 @@
     "instruction": "What is 9 + 8? Return only the final answer.",
     "expected_answer": "17",
     "task_type": "arithmetic"
+  },
+  {
+    "task_id": "task_006",
+    "instruction": "Count how many times letter 'a' appears in word 'banana'. Return only the final answer.",
+    "expected_answer": "3",
+    "task_type": "counting"
   }
 ]
