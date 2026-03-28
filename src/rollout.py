@@ -2,6 +2,7 @@ import json
 from datetime import datetime
 from typing import List, Tuple
 
+from src.base_env import BaseEnv
 from src.env import DummyTerminalBenchEnv
 from src.metrics import compute_episode_metrics
 from src.trajectory import Transition, Episode
@@ -61,7 +62,7 @@ def generate_action(
     return action
 
 
-def run_rollouts(model, tokenizer, env: DummyTerminalBenchEnv, tasks, config) -> Tuple[List[dict], float, float]:
+def run_rollouts(model, tokenizer, env: BaseEnv, tasks, config) -> Tuple[List[dict], float, float]:
     all_episodes = []
     total_reward = 0.0
     total_success = 0
@@ -92,7 +93,8 @@ def run_rollouts(model, tokenizer, env: DummyTerminalBenchEnv, tasks, config) ->
 
             next_obs, reward, done, info = env.step(action)
 
-            normalized_action = info["normalized_action"]
+            normalized_action = info.get("normalized_action", "")
+            task_type = info.get("task_type")
 
             if not info["success"]:
                 if normalized_action == last_failed_normalized_action:
@@ -102,7 +104,7 @@ def run_rollouts(model, tokenizer, env: DummyTerminalBenchEnv, tasks, config) ->
                     consecutive_same_failure_count = 1
 
                 should_stop_early = (
-                    info["task_type"] == "exact_match"
+                    task_type == "exact_match"
                     and is_verbose_failure(normalized_action)
                     and consecutive_same_failure_count >= max_consecutive_same_failures
                 )
@@ -136,10 +138,10 @@ def run_rollouts(model, tokenizer, env: DummyTerminalBenchEnv, tasks, config) ->
 
             print(f"  Step {len(transitions)}:")
             print("    Raw action:", repr(action))
-            print("    Normalized action:", repr(info["normalized_action"]))
+            print("    Normalized action:", repr(normalized_action))
             print("    Reward:", reward)
             print("    Done:", done)
-            print("    Success:", info["success"])
+            print("    Success:", info.get("success", False))
 
         episode = Episode(task_id=task.task_id, transitions=transitions)
         all_episodes.append(episode.to_dict())
@@ -147,7 +149,8 @@ def run_rollouts(model, tokenizer, env: DummyTerminalBenchEnv, tasks, config) ->
         total_reward += episode.total_reward
         total_success += int(episode.success)
 
-        print("  Final expected:", repr(final_info["expected_answer"]))
+        if "expected_answer" in final_info:
+            print("  Final expected:", repr(final_info["expected_answer"]))
         print("  Episode reward:", episode.total_reward)
         print("  Episode success:", episode.success)
         print("  Number of transitions:", len(episode.transitions))

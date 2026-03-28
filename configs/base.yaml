@@ -1,4 +1,9 @@
-benchmark: terminalbench
+benchmark:
+  name: synthetic_terminalbench
+  mode: synthetic
+  # To run TerminalBench2 tasks later, switch to:
+  # name: terminalbench2
+  # mode: official_stub
 algorithm: grpo
 
 model:
@@ -8,6 +13,7 @@ training:
   max_steps: 100
   batch_size: 2
   learning_rate: 1.0e-5
+  num_generations: 4
 
 generation:
   max_new_tokens: 16
@@ -20,3 +26,5 @@ reward:
   success_reward: 1.0
   failure_reward: 0.0
   step_penalty: 0.01
+  conciseness_bonus: 0.3
+  format_bonus: 0.2

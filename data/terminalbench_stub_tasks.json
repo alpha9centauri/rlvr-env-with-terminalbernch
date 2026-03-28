@@ -1,0 +1,35 @@
+[
+  {
+    "task_id": "tb_stub_001",
+    "instruction": "Inspect the /var/logs/app.log file and summarize error counts into /tmp/error_summary.csv.",
+    "benchmark_name": "terminalbench2",
+    "verifier_type": "log_summary",
+    "max_episode_steps": 30,
+    "metadata": {
+      "tools": ["cat", "grep", "awk"],
+      "validation": "check_csv"
+    }
+  },
+  {
+    "task_id": "tb_stub_002",
+    "instruction": "Fix the script deploy.sh so that it outputs SUCCESS when no errors occur.",
+    "benchmark_name": "terminalbench2",
+    "verifier_type": "script_output",
+    "max_episode_steps": 25,
+    "metadata": {
+      "tools": ["sed", "chmod"],
+      "validation": "check_output"
+    }
+  },
+  {
+    "task_id": "tb_stub_003",
+    "instruction": "Read config/settings.yaml and extract the api_key value for later use.",
+    "benchmark_name": "terminalbench2",
+    "verifier_type": "file_inspect",
+    "max_episode_steps": 20,
+    "metadata": {
+      "tools": ["cat"],
+      "validation": "key_present"
+    }
+  }
+]

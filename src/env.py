@@ -2,6 +2,7 @@ import re
 from dataclasses import dataclass
 from typing import Dict, Tuple, Any
 
+from src.base_env import BaseEnv
 from src.reward import RewardFunction
 
 
@@ -61,7 +62,7 @@ def compute_counting_answer(instruction: str) -> str:
     return str(count)
 
 
-class DummyTerminalBenchEnv:
+class DummyTerminalBenchEnv(BaseEnv):
     def __init__(self, reward_fn: RewardFunction, max_episode_steps: int = 20):
         self.reward_fn = reward_fn
         self.max_episode_steps = max_episode_steps
