@@ -1,0 +1,103 @@
+{
+  "config": {
+    "benchmark": "terminalbench",
+    "algorithm": "grpo",
+    "model": {
+      "name": "Qwen/Qwen2.5-0.5B-Instruct"
+    },
+    "training": {
+      "max_steps": 100,
+      "batch_size": 2,
+      "learning_rate": 1e-05
+    },
+    "generation": {
+      "max_new_tokens": 16,
+      "do_sample": false
+    },
+    "environment": {
+      "max_episode_steps": 20
+    },
+    "reward": {
+      "success_reward": 1.0,
+      "failure_reward": 0.0,
+      "step_penalty": 0.01
+    }
+  },
+  "num_tasks": 3,
+  "average_reward": 0.9899999999999999,
+  "success_rate": 1.0,
+  "episodes": [
+    {
+      "task_id": "task_001",
+      "total_reward": 0.99,
+      "success": true,
+      "transitions": [
+        {
+          "observation": {
+            "task_id": "task_001",
+            "instruction": "Output exactly: hello_world",
+            "step_count": 0
+          },
+          "action": "hello_world",
+          "reward": 0.99,
+          "done": true,
+          "info": {
+            "success": true,
+            "expected_answer": "hello_world",
+            "normalized_expected_answer": "hello_world",
+            "agent_action": "hello_world",
+            "normalized_action": "hello_world"
+          }
+        }
+      ]
+    },
+    {
+      "task_id": "task_002",
+      "total_reward": 0.99,
+      "success": true,
+      "transitions": [
+        {
+          "observation": {
+            "task_id": "task_002",
+            "instruction": "Output exactly: cat",
+            "step_count": 0
+          },
+          "action": "cat",
+          "reward": 0.99,
+          "done": true,
+          "info": {
+            "success": true,
+            "expected_answer": "cat",
+            "normalized_expected_answer": "cat",
+            "agent_action": "cat",
+            "normalized_action": "cat"
+          }
+        }
+      ]
+    },
+    {
+      "task_id": "task_003",
+      "total_reward": 0.99,
+      "success": true,
+      "transitions": [
+        {
+          "observation": {
+            "task_id": "task_003",
+            "instruction": "Output exactly: 42",
+            "step_count": 0
+          },
+          "action": "42",
+          "reward": 0.99,
+          "done": true,
+          "info": {
+            "success": true,
+            "expected_answer": "42",
+            "normalized_expected_answer": "42",
+            "agent_action": "42",
+            "normalized_action": "42"
+          }
+        }
+      ]
+    }
+  ]
+}

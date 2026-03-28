@@ -1,0 +1,32 @@
+[
+  {
+    "task_id": "task_001",
+    "instruction": "Output exactly: hello_world",
+    "expected_answer": "hello_world",
+    "task_type": "exact_match"
+  },
+  {
+    "task_id": "task_002",
+    "instruction": "Output exactly: cat",
+    "expected_answer": "cat",
+    "task_type": "exact_match"
+  },
+  {
+    "task_id": "task_003",
+    "instruction": "Output exactly: 42",
+    "expected_answer": "42",
+    "task_type": "exact_match"
+  },
+  {
+    "task_id": "task_004",
+    "instruction": "What is 15 + 27? Return only the final answer.",
+    "expected_answer": "42",
+    "task_type": "arithmetic"
+  },
+  {
+    "task_id": "task_005",
+    "instruction": "What is 9 + 8? Return only the final answer.",
+    "expected_answer": "17",
+    "task_type": "arithmetic"
+  }
+]

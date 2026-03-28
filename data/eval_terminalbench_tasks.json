@@ -1,0 +1,26 @@
+[
+  {
+    "task_id": "eval_001",
+    "instruction": "Output exactly: moon",
+    "expected_answer": "moon",
+    "task_type": "exact_match"
+  },
+  {
+    "task_id": "eval_002",
+    "instruction": "Output exactly: 7",
+    "expected_answer": "7",
+    "task_type": "exact_match"
+  },
+  {
+    "task_id": "eval_003",
+    "instruction": "What is 11 + 5? Return only the final answer.",
+    "expected_answer": "16",
+    "task_type": "arithmetic"
+  },
+  {
+    "task_id": "eval_004",
+    "instruction": "What is 100 + 23? Return only the final answer.",
+    "expected_answer": "123",
+    "task_type": "arithmetic"
+  }
+]
